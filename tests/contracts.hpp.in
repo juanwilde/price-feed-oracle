@@ -12,11 +12,11 @@ struct contracts {
 		return read_abi("${CMAKE_SOURCE_DIR}/token/token.abi");
 	}
 
-	static std::vector<uint8_t> demo_wasm() {
-		return read_wasm("${CMAKE_BINARY_DIR}/../contracts/demo/demo.wasm");
+	static std::vector<uint8_t> oracle_wasm() {
+		return read_wasm("${CMAKE_BINARY_DIR}/../contracts/oracle/oracle.wasm");
 	}
-	static std::vector<char> demo_abi() {
-		return read_abi("${CMAKE_BINARY_DIR}/../contracts/demo/demo.abi");
+	static std::vector<char> oracle_abi() {
+		return read_abi("${CMAKE_BINARY_DIR}/../contracts/oracle/oracle.abi");
 	}
 };
 } // namespace testing

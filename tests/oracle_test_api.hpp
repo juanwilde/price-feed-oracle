@@ -10,17 +10,17 @@ using namespace eosio::chain;
 using mvo = fc::mutable_variant_object;
 using action_result = base_tester::action_result;
 
-class demo_test_api {
+class oracle_test_api {
 public:
 	name contract;
 
-	demo_test_api(name acnt, tester* tester) {
+	oracle_test_api(name acnt, tester* tester) {
 		contract = acnt;
 		_tester = tester;
 
 		_tester->create_accounts({contract});
-		_tester->set_code(contract, contracts::demo_wasm());
-		_tester->set_abi(contract, contracts::demo_abi().data());
+		_tester->set_code(contract, contracts::oracle_wasm());
+		_tester->set_abi(contract, contracts::oracle_abi().data());
 
 		const auto& accnt = _tester->control->db().get<account_object, by_name>(contract);
 
@@ -35,8 +35,8 @@ public:
 		_tester->set_authority(contract, config::active_name, auth);
 	}
 
-	action_result hello(const name& user, const string& text) {
-		return push_action(user, contract, N(hello), mvo()("user", user)("text", text));
+	action_result push(const name& user, const string& data) {
+		return push_action(user, contract, N(push), mvo()("user", user)("data", data));
 	}
 
 private:

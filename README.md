@@ -1,4 +1,4 @@
-# template.Contracts 1.0.0
+# Oracle.Contracts 1.0.0
 
 ## Dependencies:
 * [eosio v2.0.7](https://github.com/EOSIO/eos/releases/tag/v2.0.7)

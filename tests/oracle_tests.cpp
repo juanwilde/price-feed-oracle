@@ -1,5 +1,5 @@
 #include "contracts.hpp"
-#include "demo_test_api.hpp"
+#include "oracle_test_api.hpp"
 #include "token_test_api.hpp"
 #include <boost/test/unit_test.hpp>
 #include <eosio/testing/tester.hpp>
@@ -15,14 +15,14 @@ using mvo = fc::mutable_variant_object;
 #define SUCCESS(call) BOOST_REQUIRE_EQUAL(success(), call)
 #define ERROR(msg, call) BOOST_REQUIRE_EQUAL(wasm_assert_msg(msg), call)
 
-class demo_tester : public tester {
+class oracle_tester : public tester {
 protected:
-	demo_test_api api;
+	oracle_test_api api;
 	token_test_api iq;
 
 public:
-	demo_tester()
-		: api(N(demo), this)
+	oracle_tester()
+		: api(N(oracle), this)
 		, iq(N(everipediaiq), this) {
 		create_accounts({N(alice), N(bob), N(cesar)});
 		produce_blocks(2);
@@ -43,9 +43,9 @@ private:
 	}
 };
 
-BOOST_AUTO_TEST_SUITE(demo_tests)
+BOOST_AUTO_TEST_SUITE(oracle_tests)
 
-BOOST_FIXTURE_TEST_CASE(hello, demo_tester) try { SUCCESS(api.hello(N(cesar), "hola")); }
+BOOST_FIXTURE_TEST_CASE(hello, oracle_tester) try { SUCCESS(api.push(N(cesar), "hola")); }
 FC_LOG_AND_RETHROW()
 
 BOOST_AUTO_TEST_SUITE_END()
